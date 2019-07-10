@@ -24,12 +24,14 @@ public class Main {
         Employee employee6=session.getMapper(EmpMapper.class).selectEmpToResultMap((long)2);
 
         Employee employeeAdd = new Employee(null,"若天2","林",23,"male","ted_163mail@163.com");
-        session.getMapper(EmpMapper.class).insertEmp(employeeAdd);
-        Department departmentAdd = new Department(null,"amd red team2");
-        session.getMapper(DeptMapper.class).insertDept(departmentAdd);
+        //session.getMapper(EmpMapper.class).insertEmp(employeeAdd);
+        Department departmentAdd = new Department(null,"amd red team14");
+        //session.getMapper(DeptMapper.class).insertDept(departmentAdd);
 
         Department department1 = session.getMapper(DeptMapper.class).selectDeptById((long)7);
 
+        Employee employee7 = session.getMapper(EmpMapper.class).getEmpAndDeptStep((long)1);
+        Employee employee8 = session.getMapper(EmpMapper.class).getEmpAndDept((long)2);
         session.close();
 
         System.out.println("add: "+employeeAdd);
@@ -46,5 +48,8 @@ public class Main {
         System.out.println(employee6);
 
         System.out.println(department1);
+
+        System.out.println(employee7);
+        System.out.println(employee8);
     }
 }

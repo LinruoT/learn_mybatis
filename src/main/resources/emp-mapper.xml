@@ -39,4 +39,40 @@
     <select id="selectEmpToResultMap" resultMap="MyEmp">
         select * from Employee where id = #{id}
     </select>
+
+<!--    方法一：联合查询，Employee getEmpAndDept(Long id);-->
+    <resultMap id="MyEmpAss" type="Employee" >
+        <id column="id" property="id" />
+        <result column="last_name" property="lastName" />
+        <result column="first_name" property="firstName" />
+        <result column="age" property="age" />
+        <result column="gender" property="gender" />
+        <result column="email" property="email" />
+        <!--    方法一：联合查询-->
+        <association property="dept" javaType="Department">
+            <id column="d_id" property="id" />
+            <result column="d_name" property="name" />
+        </association>
+    </resultMap>
+    <select id="getEmpAndDept" resultMap="MyEmpAss">
+        select e.id id,e.first_name first_name,e.last_name last_name,e.age age,e.gender gender,e.email email,e.d_id d_id,d.name d_name
+        from employee e,department d where e.d_id=d.id and e.id=#{id};
+    </select>
+
+<!--    方法二：分步查询，Employee getEmpAndDeptStep(Long id);-->
+    <resultMap id="MyEmpStep" type="Employee" >
+        <id column="id" property="id" />
+        <result column="last_name" property="lastName" />
+        <result column="first_name" property="firstName" />
+        <!--    其他如果一致的就是默认映射   -->
+        <!--    方法二：分步查询，使用select指定的方法，传入column参数，并封装给property-->
+        <association property="dept"
+                     select="DeptMapper.selectDeptById"
+                     column="d_id">
+        </association>
+    </resultMap>
+    <select id="getEmpAndDeptStep" resultMap="MyEmpStep" >
+        select * from Employee where id = #{id}
+    </select>
+
 </mapper>

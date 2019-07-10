@@ -19,4 +19,8 @@ public interface EmpMapper {
     Employee selectEmpByName(@Param("whichName")String whichName,@Param("name")String name);
 
     List<Employee> selectEmpByAge(int age);
+
+    Employee getEmpAndDept(Long id);
+    Employee getEmpAndDeptStep(Long id);
+
 }
