@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="接口类全类名"> id=方法名-->
+<mapper namespace="EmpMapper">
+    <select id="selectEmp" resultType="Employee">
+        select * from Employee where id = #{id}
+    </select>
+
+    <insert id="insertEmp" parameterType="Employee"
+            useGeneratedKeys="true" keyProperty="id"> <!--数据库添加成功后，获取主键-->
+        insert into employee(first_name, last_name, age, gender, email)
+        values (#{firstName},#{lastName},#{age},#{gender},#{email})
+    </insert>
+
+    <select id="selectEmpByFirstnameAndLastname" resultType="Employee">
+        select * from Employee where first_name = #{firstName} and last_name = #{lastName}
+    </select>
+    
+    <!--  ${}是直接拼接SQL，#{}是preparedStatement  -->
+    <select id="selectEmpByName" resultType="Employee">
+        select * from Employee where ${whichName}_name = #{name}
+    </select>
+
+
+    <!--    如何返回多个数据resultType是集合内元素类型 接口方法是List<Employee>   -->
+    <select id="selectEmpByAge" resultType="Employee">
+        select * from employee where age = #{age}
+    </select>
+
+    <!--    自定义结果  resultMap     -->
+    <resultMap id="MyEmp" type="Employee">
+        <id column="id" property="id" />
+        <result column="last_name" property="lastName" />
+        <result column="first_name" property="firstName" />
+        <!--    其他如果一致的就是默认映射   -->
+    </resultMap>
+    <select id="selectEmpToResultMap" resultMap="MyEmp">
+        select * from Employee where id = #{id}
+    </select>
+</mapper>
