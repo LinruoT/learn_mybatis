@@ -75,4 +75,8 @@
         select * from Employee where id = #{id}
     </select>
 
+<!--    List<Employee> selectEmpByDept(long did);-->
+    <select id="selectEmpByDept" resultType="Employee">
+        select * from employee where d_id = #{did}
+    </select>
 </mapper>
