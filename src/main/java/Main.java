@@ -24,7 +24,7 @@ public class Main {
         Employee employee6=session.getMapper(EmpMapper.class).selectEmpToResultMap((long)2);
 
         Employee employeeAdd = new Employee(null,"若天2","林",23,"male","ted_163mail@163.com");
-        //session.getMapper(EmpMapper.class).insertEmp(employeeAdd);k
+        //session.getMapper(EmpMapper.class).insertEmp(employeeAdd);
         Department departmentAdd = new Department(null,"amd red team14");
         //session.getMapper(DeptMapper.class).insertDept(departmentAdd);
 
@@ -33,7 +33,12 @@ public class Main {
         Employee employee7 = session.getMapper(EmpMapper.class).getEmpAndDeptStep((long)1);
         Employee employee8 = session.getMapper(EmpMapper.class).getEmpAndDept((long)2);
         List<Employee> employees2 = session.getMapper(EmpMapperDynamicSql.class).
-                getEmpsByConditionTrim(new Employee((long)5,"","lin",23,"",""));
+                getEmpsByConditionChoose(new Employee(null,"",null,23,"",null));
+
+        session.getMapper(EmpMapperDynamicSql.class).updateEmp(
+                new Employee((long)23,null,"23333333",1,null,null));
+
+
         session.close();
 
         System.out.println("add: "+employeeAdd);
@@ -47,7 +52,7 @@ public class Main {
              ) {
             System.out.println(emp);
         }
-        System.out.println("测试if得到的结果");
+        System.out.println("测试choose得到的结果");
         for (Employee emp:employees2
              ) {
             System.out.println(emp);
