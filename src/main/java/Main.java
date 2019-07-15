@@ -24,7 +24,7 @@ public class Main {
         Employee employee6=session.getMapper(EmpMapper.class).selectEmpToResultMap((long)2);
 
         Employee employeeAdd = new Employee(null,"若天2","林",23,"male","ted_163mail@163.com");
-        //session.getMapper(EmpMapper.class).insertEmp(employeeAdd);
+        //session.getMapper(EmpMapper.class).insertEmp(employeeAdd);k
         Department departmentAdd = new Department(null,"amd red team14");
         //session.getMapper(DeptMapper.class).insertDept(departmentAdd);
 

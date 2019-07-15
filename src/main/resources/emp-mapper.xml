@@ -5,7 +5,7 @@
 <!--<mapper namespace="接口类全类名"> id=方法名-->
 <mapper namespace="EmpMapper">
     <select id="selectEmp" resultType="Employee">
-        select * from Employee where id = #{id}
+        select * from employee where id = #{id}
     </select>
 
     <insert id="insertEmp" parameterType="Employee"
@@ -15,12 +15,12 @@
     </insert>
 
     <select id="selectEmpByFirstnameAndLastname" resultType="Employee">
-        select * from Employee where first_name = #{firstName} and last_name = #{lastName}
+        select * from employee where first_name = #{firstName} and last_name = #{lastName}
     </select>
     
     <!--  ${}是直接拼接SQL，#{}是preparedStatement  -->
     <select id="selectEmpByName" resultType="Employee">
-        select * from Employee where ${whichName}_name = #{name}
+        select * from employee where ${whichName}_name = #{name}
     </select>
 
 
@@ -37,7 +37,7 @@
         <!--    其他如果一致的就是默认映射   -->
     </resultMap>
     <select id="selectEmpToResultMap" resultMap="MyEmp">
-        select * from Employee where id = #{id}
+        select * from employee where id = #{id}
     </select>
 
 <!--    方法一：联合查询，Employee getEmpAndDept(Long id);-->
@@ -72,7 +72,7 @@
         </association>
     </resultMap>
     <select id="getEmpAndDeptStep" resultMap="MyEmpStep" >
-        select * from Employee where id = #{id}
+        select * from employee where id = #{id}
     </select>
 
 <!--    List<Employee> selectEmpByDept(long did);-->
