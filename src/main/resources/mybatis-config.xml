@@ -31,5 +31,6 @@
     <mappers>
         <mapper resource="emp-mapper.xml" />
         <mapper resource="dept-mapper.xml" />
+        <mapper resource="EmpMapperDynamicSql.xml" />
     </mappers>
 </configuration>

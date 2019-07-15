@@ -32,6 +32,8 @@ public class Main {
 
         Employee employee7 = session.getMapper(EmpMapper.class).getEmpAndDeptStep((long)1);
         Employee employee8 = session.getMapper(EmpMapper.class).getEmpAndDept((long)2);
+        List<Employee> employees2 = session.getMapper(EmpMapperDynamicSql.class).
+                getEmpsByConditionTrim(new Employee((long)5,"","lin",23,"",""));
         session.close();
 
         System.out.println("add: "+employeeAdd);
@@ -42,6 +44,11 @@ public class Main {
         System.out.println(employee4);
         System.out.println(employee5);
         for (Employee emp:employees
+             ) {
+            System.out.println(emp);
+        }
+        System.out.println("测试if得到的结果");
+        for (Employee emp:employees2
              ) {
             System.out.println(emp);
         }
