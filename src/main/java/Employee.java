@@ -1,4 +1,6 @@
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
