@@ -46,4 +46,20 @@ public class MyBatisTest {
             session2.close();
         }
     }
+
+    @Test
+    public void testEnum() throws IOException {
+        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSession session =sqlSessionFactory.openSession();
+
+        System.out.println("40115: "+session.getMapper(EmpMapper.class).selectEmp((long)40115));
+        Employee employee=new Employee(null,"testEnum","lin",11,"male","123@rrr.ccc");
+
+        session.getMapper(EmpMapper.class).insertEmp(employee);
+
+
+        session.commit();
+        session.close();
+    }
 }

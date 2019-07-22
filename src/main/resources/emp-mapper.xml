@@ -13,8 +13,8 @@
 
     <insert id="insertEmp" parameterType="Employee"
             useGeneratedKeys="true" keyProperty="id"> <!--数据库添加成功后，获取主键-->
-        insert into employee(first_name, last_name, age, gender, email)
-        values (#{firstName},#{lastName},#{age},#{gender},#{email})
+        insert into employee(first_name, last_name, age, gender, email,emp_status)
+        values (#{firstName},#{lastName},#{age},#{gender},#{email},#{empStatus})
     </insert>
 
     <select id="selectEmpByFirstnameAndLastname" resultType="Employee">

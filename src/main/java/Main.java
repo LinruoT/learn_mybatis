@@ -2,6 +2,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -29,7 +31,7 @@ public class Main {
         List<Employee> employees=session.getMapper(EmpMapper.class).selectEmpByAge(23);
 
         //分页
-        Page<Object> page = PageHelper.startPage(5, 5);
+        Page<Object> page = PageHelper.startPage(1, 5);
         List<Employee> employeesPage=session.getMapper(EmpMapper.class).selectEmpByAge(23);
         System.out.println("总数"+page.getTotal()+"总页数"+page.getPages()+"当前页"+page.getPageNum());
         //用pageInfo
@@ -62,7 +64,7 @@ public class Main {
         Employee employee7 = session.getMapper(EmpMapper.class).getEmpAndDeptStep((long)1);
         Employee employee8 = session.getMapper(EmpMapper.class).getEmpAndDept((long)2);
         List<Employee> employees2 = session.getMapper(EmpMapperDynamicSql.class).
-                getEmpsByConditionIf(new Employee(null,"","li",23,"",null));
+                getEmpsByConditionIf(new Employee(null,"","",23,"male",null));
 
         session.getMapper(EmpMapperDynamicSql.class).updateEmp(
                 new Employee((long)23,null,"23333333",1,null,null));
@@ -120,5 +122,20 @@ public class Main {
 
         System.out.println(employee7);
         System.out.println(employee8);
+
+        //可以批量操作的session，耗时4600ms
+//        SqlSession session2=sqlSessionFactory.openSession(ExecutorType.BATCH);
+//        //非批量，SqlSession session2=sqlSessionFactory.openSession();
+//        long start=System.currentTimeMillis();
+//        for (int i=0;i<10000;i++){
+//            session2.getMapper(EmpMapper.class).insertEmp(
+//                new Employee(null, UUID.randomUUID().toString().substring(0,8),"lin",24,"female","123@123.com")
+//                );
+//        }
+//        session2.commit();
+//        long end = System.currentTimeMillis();
+//        System.out.println("时间："+(end-start));
+//        session2.close();
+
     }
 }

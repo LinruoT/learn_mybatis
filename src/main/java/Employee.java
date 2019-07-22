@@ -8,6 +8,7 @@ public class Employee implements Serializable {
     private String gender;
     private String email;
     private Department dept;
+    private EmpStatus empStatus=EmpStatus.LOGOUT;
 
 
     public Employee() {
@@ -78,6 +79,14 @@ public class Employee implements Serializable {
         return dept;
     }
 
+    public EmpStatus getEmpStatus() {
+        return empStatus;
+    }
+
+    public void setEmpStatus(EmpStatus empStatus) {
+        this.empStatus = empStatus;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -88,6 +97,8 @@ public class Employee implements Serializable {
                 ", gender=" + gender +
                 ", email='" + email + '\'' +
                 ", dept='" + dept + '\'' +
+                ", dept='" + dept + '\'' +
+                ", status='" + empStatus + '\'' +
                 '}';
     }
 }

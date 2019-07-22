@@ -9,6 +9,7 @@
         即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射
         如果不开启，可以用resultMap来自定义字段名不同时的映射
 -->
+
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="logImpl" value="LOG4J2" />
@@ -18,7 +19,10 @@
 <!--        开启缓存-->
         <setting name="cacheEnabled" value="true"/>
     </settings>
-
+    <typeHandlers>
+<!--        自定义的类型处理器-->
+        <typeHandler handler="MyEnumEmpStatusTypeHandler" javaType="EmpStatus" />
+    </typeHandlers>
     <plugins>
         <plugin interceptor="plugin.MyFirstPlugin">
             <property name="someProperty" value="gaoduanB"/>

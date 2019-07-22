@@ -56,7 +56,7 @@
         </foreach>
     </select>
 
-<!--    foreach, 批量保存values (),(),(),()-->
+<!--    foreach, 批量保存，拼接超长sql：values (),(),(),()-->
     <insert id="addEmps">
         insert into employee(<include refid="insertCol" />)
         values
@@ -64,6 +64,10 @@
             (#{emp.firstName},#{emp.lastName},#{emp.age},#{emp.gender},#{emp.email},#{emp.dept.id})
         </foreach>
     </insert>
+
+<!--    真批量保存，不是拼接超长sql，需要建立session支持批量操作-->
+
+
 <!--  sql, 可重用sql提取出来，里面可以用if
       include 引用，可以用property新增变量，给<sql>中${xxx}使用-->
     <sql id="insertCol">
