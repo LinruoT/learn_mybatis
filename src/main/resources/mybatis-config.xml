@@ -19,6 +19,15 @@
         <setting name="cacheEnabled" value="true"/>
     </settings>
 
+    <plugins>
+        <plugin interceptor="plugin.MyFirstPlugin">
+            <property name="someProperty" value="gaoduanB"/>
+        </plugin>
+        <plugin interceptor="plugin.MySecondPlugin">
+            <property name="someProperty" value="eruaaaaa!!!"/>
+        </plugin>
+    </plugins>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -30,6 +39,7 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
         <mapper resource="emp-mapper.xml" />
         <mapper resource="dept-mapper.xml" />
