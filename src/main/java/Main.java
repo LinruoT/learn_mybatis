@@ -1,3 +1,6 @@
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,7 +24,26 @@ public class Main {
         Employee employee3=session.getMapper(EmpMapper.class).selectEmp2((long) 1); //方式三：注解+接口类
         Employee employee4=session.getMapper(EmpMapper.class).selectEmpByFirstnameAndLastname("billy","lin");
         Employee employee5=session.getMapper(EmpMapper.class).selectEmpByName("first","ruotian");
+
+        //不分页
         List<Employee> employees=session.getMapper(EmpMapper.class).selectEmpByAge(23);
+
+        //分页
+        Page<Object> page = PageHelper.startPage(5, 5);
+        List<Employee> employeesPage=session.getMapper(EmpMapper.class).selectEmpByAge(23);
+        System.out.println("总数"+page.getTotal()+"总页数"+page.getPages()+"当前页"+page.getPageNum());
+        //用pageInfo
+        PageInfo<Employee> pageInfo=new PageInfo<Employee>(employeesPage);
+        System.out.println("总数"+pageInfo.getTotal()+"总页数"+pageInfo.getPages()+"当前页"+pageInfo.getPageNum());
+        //用pageInfo navigate可以得到'连续页码'
+        PageInfo<Employee> pageInfo2=new PageInfo<Employee>(employeesPage,6);
+        System.out.println("总数"+pageInfo.getTotal()+"总页数"+pageInfo.getPages()+"当前页"+pageInfo.getPageNum());
+        int[] nums = pageInfo2.getNavigatepageNums();
+        System.out.println("连续页码");
+        for (int num:nums
+             ) {
+            System.out.println(num);
+        }
         Employee employee6=session.getMapper(EmpMapper.class).selectEmpToResultMap((long)2);
 
         Employee employeeAdd1 = new Employee(null,"若天412","林",23,"male","ted_163mail@163.com");
@@ -66,10 +88,22 @@ public class Main {
         System.out.println(employee3);
         System.out.println(employee4);
         System.out.println(employee5);
+
+
+        //不用分页
+        System.out.println("分页前");
         for (Employee emp:employees
              ) {
             System.out.println(emp);
         }
+        //用分页
+        System.out.println("分页后");
+        for (Employee emp:employeesPage
+        ) {
+            System.out.println(emp);
+        }
+
+
         System.out.println("测试choose得到的结果");
         for (Employee emp:employees2
              ) {

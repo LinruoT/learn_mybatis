@@ -26,6 +26,15 @@
         <plugin interceptor="plugin.MySecondPlugin">
             <property name="someProperty" value="eruaaaaa!!!"/>
         </plugin>
+
+<!--        分页插件 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+            <property name="helperDialect" value="mysql"/>
+            <property name="param1" value="value1"/>
+            <property name="param2" value="value2"/>
+            <property name="param3" value="value3"/>
+        </plugin>
     </plugins>
 
     <environments default="development">
